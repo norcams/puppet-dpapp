@@ -1,0 +1,63 @@
+###
+# app configuration
+# http://docs.pylonsproject.org/projects/pyramid/en/1.5-branch/narr/environment.html
+###
+
+[app:main]
+use = egg:himlar_dp_prep
+
+pyramid.reload_templates = false
+pyramid.debug_authorization = false
+pyramid.debug_notfound = false
+pyramid.debug_routematch = false
+pyramid.default_locale_name = en
+
+# Openstack settings
+horizon_url = <%= @horizon_url %>
+keystone_url = <%= @keystone_url %>
+admin_pw = <%= @admin_pw %>
+# Dataporten settings
+# Find them in Connect Dashboard/<this client>/OAuth details/OAuth Client credentials
+oauth_client_id = <%= @oauth_client_id %>
+oauth_client_secret = <%= @oauth_client_secret %>
+
+###
+# wsgi server configuration
+###
+
+[server:main]
+use = egg:waitress#main
+host = <%= @host %>
+port = <%= @port %>
+
+###
+# logging configuration
+# http://docs.pylonsproject.org/projects/pyramid/en/1.5-branch/narr/logging.html
+###
+
+[loggers]
+keys = root, himlar_dp_prep
+
+[handlers]
+keys = console
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = WARN
+handlers = console
+
+[logger_himlar_dp_prep]
+level = WARN
+handlers =
+qualname = himlar_dp_prep
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[formatter_generic]
+format = %(asctime)s %(levelname)-5.5s [%(name)s][%(threadName)s] %(message)s
