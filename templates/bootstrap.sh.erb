@@ -1,0 +1,19 @@
+#!/bin/bash
+
+type='<%= @deployment %>'
+installdir='/opt/dpapp'
+packages='gcc python-devel python-virtualenv httpd git'
+user="dpapp"
+
+yum install -y ${packages}
+
+if [ -d "${installdir}" ]; then
+  rm -Rf ${installdir}
+fi
+
+mkdir ${installdir}
+chown ${user} ${installdir}
+git clone https://github.com/norcams/himlar-dp-prep.git ${installdir}/.
+cd ${installdir} && git submodule update --init
+virtualenv ${installdir}
+cd ${installdir} && bin/python setup.py ${type}
