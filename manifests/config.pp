@@ -5,10 +5,18 @@ class dpapp::config(
   $admin_pw = $::dpapp::admin_pw,
   $oauth_client_id = $::dpapp::oauth_client_id,
   $oauth_client_secret = $::dpapp::oauth_client_secret,
+  $dp_domain_name = $::dpapp::dp_domain_name,
+  $admin_user = $::dpapp::admin_user,
+  $member_role_name = $::dpapp::member_role_name,
+  $default_domain_name = $::dpapp::default_domain_name,
+  $project_name = $::dpapp::project_name,
   $installdir = $::dpapp::installdir,
   $host = $::dpapp::host,
   $port = $::dpapp::port,
-  $deployment = $::dpapp::deployment
+  $keystone_cachain = $::dpapp::keystone_cert,
+  $log_level = $::dpapp::log_level,
+  $reload_templates = $::dpapp::reload_templates,
+  $deployment = $::dpapp::deployment,
 ) {
 
   file { "${installdir}/production.ini":
@@ -18,7 +26,14 @@ class dpapp::config(
     content => template("${module_name}/production.ini.erb")
   }
 
-  file { "/usr/local/sbin/bootstrap_dpapp.sh":
+  file { "${installdir}/pyramid.wsgi":
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    content => template("${module_name}/pyramid.wsgi.erb")
+  }
+
+  file { "/usr/local/sbin/dpapp_develop.sh":
     ensure  => file,
     owner   => 'root',
     group   => 'root',

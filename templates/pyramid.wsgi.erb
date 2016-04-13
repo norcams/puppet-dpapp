@@ -1,0 +1,7 @@
+import os
+os.environ['PYTHON_EGG_CACHE'] = '/tmp/python-eggs'
+
+from pyramid.paster import get_app, setup_logging
+ini_path = '<%= @installdir %>/production.ini'
+setup_logging(ini_path)
+application = get_app(ini_path, 'main')

@@ -1,10 +1,12 @@
 #!/bin/bash
+#
+# This can be used to set up himlar-dp_prep in develop mods_enable
+#
 
-type='<%= @deployment %>'
-installdir='/opt/dpapp'
-packages='gcc python-devel python-virtualenv httpd git'
+installdir='/opt/dpapp.develop'
+packages='gcc python-devel python-virtualenv git'
 user="dpapp"
-
+repo="https://github.com/norcams/himlar-dp-prep.git"
 yum install -y ${packages}
 
 if [ -d "${installdir}" ]; then
@@ -13,7 +15,7 @@ fi
 
 mkdir ${installdir}
 chown ${user} ${installdir}
-git clone https://github.com/norcams/himlar-dp-prep.git ${installdir}/.
+git clone ${repo} ${installdir}/.
 cd ${installdir} && git submodule update --init
 virtualenv ${installdir}
-cd ${installdir} && bin/python setup.py ${type}
+cd ${installdir} && bin/python setup.py develop
