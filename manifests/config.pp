@@ -13,6 +13,7 @@ class dpapp::config(
   $installdir = $::dpapp::installdir,
   $host = $::dpapp::host,
   $port = $::dpapp::port,
+  $with_local_user = $::dpapp::with_local_user,
   $keystone_cachain = $::dpapp::keystone_cert,
   $log_level = $::dpapp::log_level,
   $reload_templates = $::dpapp::reload_templates,

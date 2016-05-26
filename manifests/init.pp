@@ -14,6 +14,7 @@ class dpapp(
   $keystone_cachain = '/etc/pki/tls/cert.pem',
   $host = '0.0.0.0',
   $port = '6543',
+  $with_local_user = true,
   $manage_config = true,
   $log_level = 'WARN',
   $reload_templates = 'false',
