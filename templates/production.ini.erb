@@ -4,6 +4,7 @@
 ###
 
 [app:main]
+filter-with = proxy-prefix
 use = egg:himlar_dp_prep
 
 pyramid.reload_templates = <%= @reload_templates %>
@@ -37,6 +38,9 @@ oauth_client_secret = <%= @oauth_client_secret %>
 use = egg:waitress#main
 host = <%= @host %>
 port = <%= @port %>
+
+[filter:proxy-prefix]
+use = egg:PasteDeploy#prefix
 
 ###
 # logging configuration
