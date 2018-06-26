@@ -13,11 +13,16 @@ class dpapp::config(
   $installdir = $::dpapp::installdir,
   $host = $::dpapp::host,
   $port = $::dpapp::port,
+  $region = $::dpapp::region,
   $with_local_user = $::dpapp::with_local_user,
-  $keystone_cachain = $::dpapp::keystone_cert,
+  $keystone_cachain = $::dpapp::keystone_cachain,
   $log_level = $::dpapp::log_level,
   $reload_templates = $::dpapp::reload_templates,
   $deployment = $::dpapp::deployment,
+  $mq_host = $::dpapp::mq_host,
+  $mq_vhost = $::dpapp::mq_vhost,
+  $mq_username = $::dpapp::mq_username,
+  $mq_password = $::dpapp::mq_password,
 ) {
 
   file { "${installdir}/production.ini":

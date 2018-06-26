@@ -7,6 +7,10 @@ class dpapp(
   $oauth_client_secret,
   $dp_domain_name,
   $region,
+  $mq_host,
+  $mq_password,
+  $mq_username = 'access',
+  $mq_vhost = 'himlarcli',
   $admin_user = 'admin',
   $member_role_name = 'user',
   $default_domain_name = 'default',
@@ -21,7 +25,8 @@ class dpapp(
   $reload_templates = 'false',
   $deployment = 'install'
 ) {
-
+  info($region)
+  info($mq_host)
   class { '::dpapp::install': }
   if $manage_config {
     class { '::dpapp::config':
